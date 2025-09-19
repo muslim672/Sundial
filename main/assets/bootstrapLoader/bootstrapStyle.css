@@ -1,0 +1,22 @@
+@import url('bootstrap.rtl.min.css');
+
+body {
+    font-family: Courier New;
+}
+
+#container {
+    max-width: 500px;
+    margin: auto;
+}
+
+h1, p {
+    text-align: center;
+}
+
+table {
+    margin: auto;
+}
+
+#timer, #hijri, #info, #Update {
+    display: none;
+}

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang='ar' dir='rtl'>
+<head>
+<meta charset='UTF-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, user-scalable=false'>
+<title>القبلة</title>
+<link href='favicon.png' rel='icon'>
+<style>
+    html {
+        direction: rtl;
+    }
+    #arrow {
+        text-align: center;
+        font-size: 85vw;
+        margin: auto;
+    }
+</style>
+</head>
+<body>
+<h1>نصائح لتحديد اتجاه القبلة بشكل أكثر دقة:</h1>
+<h1>قم بمعايرة الجهاز عن طريق تحريكه على شكل ∞</h1>
+<h1>قم بتحديد اتجاه القبلة أكثر من مرة، لا تكتفِ بالمرة الأولى</h1>
+<h1>انتظر قليلًا حتى يتم تحديد اتجاه القبلة</h1>
+<p id='arrow'>↑</p>
+<script src='sunMod/mathMod.js'></script>
+<script>
+    let lat_k = 21.4225;
+    let long_k = 39.8262;
+    let lat;
+    let long;
+    let bearing;
+    navigator.geolocation.getCurrentPosition(
+        (position) => {
+            lat = position.coords.latitude;
+            long = position.coords.longitude;
+            bearing = atan2_d(sin_r(long_k - long) * cos_r(lat_k), cos_r(lat) * sin_r(lat_k) - sin_r(lat) * cos_r(lat_k) * cos_r(long_k - long));
+        }
+    );
+    window.addEventListener('deviceorientationabsolute', (event) => {
+        let qibla = event.alpha + bearing;
+        document.getElementById('arrow').style.transform = `rotate(${qibla}deg)`;
+    });
+</script>
+</body>
+</html>
